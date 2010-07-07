@@ -14,9 +14,9 @@ var WebSocketDemo = {
     this.message_list = $("#messages");
     this.message_form = $("#message_form");
     this.message_form.submit(this.on_form_submit);
-    
     this.name_field = $('#message_name');
     this.body_field = $('#message_body');
+    this.file_field = $('#message_file');
     this.submit_button = $('#submit_button');
   },
   
@@ -26,10 +26,16 @@ var WebSocketDemo = {
   },
   
   display_message: function(name, body) {
+
     $(this).trigger('displaying_message', [name, body]);
     this.message_list.prepend("<li><strong>" + sanitize(name) + 
-                              ":</strong> " + sanitize(body) + "</li>");
+                              ":</strong> <img src='" + body + "' alt='image from'></li>");
   },
+  display_image: function(name, body) {
+      $(this).trigger('displaying_image', [name, body]);
+      this.message_list.prepend("<li><strong>" + sanitize(name) + 
+                                ":</strong> " + + "</li>");
+    },
   
   // 'this' is the form element
   on_form_submit: function(event) {
